@@ -1,0 +1,254 @@
+// Create users collection
+db.createCollection("users", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "password"],
+            properties: {
+                user_id: { bsonType: "int", description: "User ID" },
+                name: { bsonType: "string", description: "Name" },
+                password: { bsonType: "string", description: "Password" }
+            }
+        }
+    }
+});
+
+// create daftar_nonton collection
+db.createCollection("daftar_nonton", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                customer_id: { bsonType: "int", description: "Customer ID" },
+                film_id: { bsonType: "int", description: "Film ID" },
+                tanggal_nonton: { bsonType: "date", description: "Date of Watching" }
+            }
+        }
+    }
+});
+
+// create film collection
+db.createCollection("film", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                film_id: { bsonType: "int", description: "Film ID" },
+                film_name: { bsonType: "string", description: "Film Name" },
+                publish_date: { bsonType: "date", description: "Publish Date" }
+            }
+        }
+    }
+});
+
+// create category collection
+db.createCollection("category", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                category_id: { bsonType: "int", description: "Category ID" },
+                category_name: { bsonType: "string", description: "Category Name" }
+            }
+        }
+    }
+});
+
+// create cast collection
+db.createCollection("cast", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                film_id: { bsonType: "int", description: "Film ID" },
+                artist_id: { bsonType: "int", description: "Artist ID" }
+            }
+        }
+    }
+});
+
+// create artist collection
+db.createCollection("artist", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                artist_id: { bsonType: "int", description: "Artist ID" },
+                artist_name: { bsonType: "string", description: "Artist Name" },
+                artist_dob: { bsonType: "date", description: "Artist Date of Birth" }
+            }
+        }
+    }
+});
+
+// create category_film collection
+db.createCollection("category_film", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                category_id: { bsonType: "int", description: "Category ID" },
+                film_id: { bsonType: "int", description: "Film ID" }
+            }
+        }
+    }
+});
+  
+
+// Insert 10 data into the users collection
+db.users.insertMany([
+    { name: 'kaka', password: '123haha' },
+    { name: 'beti', password: '321ijah' },
+    { name: 'vina', password: '12345678' },
+    { name: 'rani', password: 'syaqala' },
+    { name: 'vivi', password: '1234gaga' },
+    { name: 'roni', password: 'sajad211' },
+    { name: 'kaka', password: 'sl4nk256' },
+    { name: 'vincent', password: 'vincent123' },
+    { name: 'jamal', password: 'jamalia128' },
+    { name: 'stephanie', password: 'beautyinside' }
+]);
+
+// Insert 10 data into the film collection
+db.film.insertMany([
+    { _id: 1, film_name: "The Avengers", publish_date: ISODate("2022-05-01") },
+    { _id: 2, film_name: "Inception", publish_date: ISODate("2010-07-16") },
+    { _id: 3, film_name: "Jurassic Park", publish_date: ISODate("1993-06-11") },
+    { _id: 4, film_name: "Titanic", publish_date: ISODate("1997-12-19") },
+    { _id: 5, film_name: "The Shawshank Redemption", publish_date: ISODate("1994-09-23") },
+    { _id: 6, film_name: "Avatar", publish_date: ISODate("2009-12-18") },
+    { _id: 7, film_name: "The Dark Knight", publish_date: ISODate("2008-07-18") },
+    { _id: 8, film_name: "Pulp Fiction", publish_date: ISODate("1994-10-14") },
+    { _id: 9, film_name: "Forrest Gump", publish_date: ISODate("1994-07-06") },
+    { _id: 10, film_name: "The Matrix", publish_date: ISODate("1999-03-31") }
+]);
+
+// Insert 10 data into the category collection
+db.category.insertMany([
+    { _id: 1, category_name: "Action" },
+    { _id: 2, category_name: "Sci-Fi" },
+    { _id: 3, category_name: "Adventure" },
+    { _id: 4, category_name: "Drama" },
+    { _id: 5, category_name: "Romance" },
+    { _id: 6, category_name: "Thriller" },
+    { _id: 7, category_name: "Comedy" },
+    { _id: 8, category_name: "Fantasy" },
+    { _id: 9, category_name: "Crime" },
+    { _id: 10, category_name: "Animation" }
+]);
+
+// Insert 10 data into the artist collection
+db.artist.insertMany([
+    { _id: 1, artist_name: "Robert Downey Jr.", artist_dob: ISODate("1965-04-04") },
+    { _id: 2, artist_name: "Leonardo DiCaprio", artist_dob: ISODate("1974-11-11") },
+    { _id: 3, artist_name: "Sam Neill", artist_dob: ISODate("1947-09-14") },
+    { _id: 4, artist_name: "Kate Winslet", artist_dob: ISODate("1975-10-05") },
+    { _id: 5, artist_name: "Morgan Freeman", artist_dob: ISODate("1937-06-01") },
+    { _id: 6, artist_name: "Zoe Saldana", artist_dob: ISODate("1978-06-19") },
+    { _id: 7, artist_name: "Christian Bale", artist_dob: ISODate("1974-01-30") },
+    { _id: 8, artist_name: "John Travolta", artist_dob: ISODate("1954-02-18") },
+    { _id: 9, artist_name: "Tom Hanks", artist_dob: ISODate("1956-07-09") },
+    { _id: 10, artist_name: "Keanu Reeves", artist_dob: ISODate("1964-09-02") }
+]);
+
+// Insert 30 data into the daftar_nonton collection
+db.daftar_nonton.insertMany([
+    { customer_id: 1, film_id: 1, tanggal_nonton: ISODate('2023-07-28') },
+    { customer_id: 1, film_id: 2, tanggal_nonton: ISODate('2023-07-29') },
+    { customer_id: 1, film_id: 3, tanggal_nonton: ISODate('2023-07-30') },
+    { customer_id: 2, film_id: 4, tanggal_nonton: ISODate('2023-07-24') },
+    { customer_id: 2, film_id: 5, tanggal_nonton: ISODate('2023-07-25') },
+    { customer_id: 2, film_id: 6, tanggal_nonton: ISODate('2023-07-26') },
+    { customer_id: 3, film_id: 7, tanggal_nonton: ISODate('2023-07-13') },
+    { customer_id: 3, film_id: 8, tanggal_nonton: ISODate('2023-07-14') },
+    { customer_id: 3, film_id: 9, tanggal_nonton: ISODate('2023-07-15') },
+    { customer_id: 4, film_id: 10, tanggal_nonton: ISODate('2023-07-15') },
+    { customer_id: 4, film_id: 1, tanggal_nonton: ISODate('2023-07-16') },
+    { customer_id: 4, film_id: 3, tanggal_nonton: ISODate('2023-07-17') },
+    { customer_id: 5, film_id: 4, tanggal_nonton: ISODate('2023-07-16') },
+    { customer_id: 5, film_id: 2, tanggal_nonton: ISODate('2023-07-17') },
+    { customer_id: 5, film_id: 10, tanggal_nonton: ISODate('2023-07-18') },
+    { customer_id: 6, film_id: 1, tanggal_nonton: ISODate('2023-08-01') },
+    { customer_id: 6, film_id: 2, tanggal_nonton: ISODate('2023-08-02') },
+    { customer_id: 6, film_id: 4, tanggal_nonton: ISODate('2023-08-03') },
+    { customer_id: 7, film_id: 3, tanggal_nonton: ISODate('2023-08-02') },
+    { customer_id: 7, film_id: 7, tanggal_nonton: ISODate('2023-08-03') },
+    { customer_id: 7, film_id: 6, tanggal_nonton: ISODate('2023-08-04') },
+    { customer_id: 8, film_id: 8, tanggal_nonton: ISODate('2023-08-01') },
+    { customer_id: 8, film_id: 6, tanggal_nonton: ISODate('2023-08-02') },
+    { customer_id: 8, film_id: 9, tanggal_nonton: ISODate('2023-08-03') },
+    { customer_id: 9, film_id: 9, tanggal_nonton: ISODate('2023-08-12') },
+    { customer_id: 9, film_id: 6, tanggal_nonton: ISODate('2023-08-13') },
+    { customer_id: 9, film_id: 8, tanggal_nonton: ISODate('2023-08-14') },
+    { customer_id: 10, film_id: 7, tanggal_nonton: ISODate('2023-08-25') },
+    { customer_id: 10, film_id: 9, tanggal_nonton: ISODate('2023-08-27') },
+    { customer_id: 10, film_id: 10, tanggal_nonton: ISODate('2023-08-30') }
+]);
+
+// Insert 30 data into the category_film collection
+db.category_film.insertMany([
+    { category_id: 1, film_id: 1 },
+    { category_id: 2, film_id: 1 },
+    { category_id: 3, film_id: 2 },
+    { category_id: 4, film_id: 3 },
+    { category_id: 5, film_id: 8 },
+    { category_id: 6, film_id: 5 },
+    { category_id: 7, film_id: 7 },
+    { category_id: 8, film_id: 4 },
+    { category_id: 9, film_id: 4 },
+    { category_id: 10, film_id: 6 },
+    { category_id: 1, film_id: 5 },
+    { category_id: 2, film_id: 2 },
+    { category_id: 3, film_id: 1 },
+    { category_id: 4, film_id: 8 },
+    { category_id: 5, film_id: 7 },
+    { category_id: 6, film_id: 9 },
+    { category_id: 7, film_id: 5 },
+    { category_id: 8, film_id: 1 },
+    { category_id: 9, film_id: 6 },
+    { category_id: 10, film_id: 3 },
+    { category_id: 1, film_id: 2 },
+    { category_id: 2, film_id: 10 },
+    { category_id: 3, film_id: 7 },
+    { category_id: 4, film_id: 2 },
+    { category_id: 5, film_id: 2 },
+    { category_id: 6, film_id: 6 },
+    { category_id: 7, film_id: 8 },
+    { category_id: 8, film_id: 10 },
+    { category_id: 9, film_id: 7 },
+    { category_id: 10, film_id: 2 }
+]);
+
+// Insert 30 data into the cast collection
+db.cast.insertMany([
+    { film_id: 6, artist_id: 5 },
+    { film_id: 7, artist_id: 7 },
+    { film_id: 8, artist_id: 4 },
+    { film_id: 5, artist_id: 7 },
+    { film_id: 6, artist_id: 9 },
+    { film_id: 7, artist_id: 5 },
+    { film_id: 8, artist_id: 1 },
+    { film_id: 9, artist_id: 6 },
+    { film_id: 10, artist_id: 3 },
+    { film_id: 1, artist_id: 2 },
+    { film_id: 2, artist_id: 10 },
+    { film_id: 3, artist_id: 7 },
+    { film_id: 4, artist_id: 2 },
+    { film_id: 5, artist_id: 2 },
+    { film_id: 6, artist_id: 6 },
+    { film_id: 7, artist_id: 8 },
+    { film_id: 8, artist_id: 10 },
+    { film_id: 9, artist_id: 7 },
+    { film_id: 10, artist_id: 2 },
+    { film_id: 1, artist_id: 1 },
+    { film_id: 2, artist_id: 1 },
+    { film_id: 3, artist_id: 2 },
+    { film_id: 4, artist_id: 3 },
+    { film_id: 5, artist_id: 8 },
+    { film_id: 9, artist_id: 4 },
+    { film_id: 10, artist_id: 6 },
+    { film_id: 1, artist_id: 5 },
+    { film_id: 2, artist_id: 2 },
+    { film_id: 3, artist_id: 1 },
+    { film_id: 4, artist_id: 8 }
+]);
